@@ -1,0 +1,21 @@
+{
+  "$schema": "https://playground.wordpress.net/blueprint-schema.json",
+  "landingPage": "/",
+  "preferredVersions": { "php": "8.3", "wp": "latest" },
+  "features": { "networking": true },
+  "login": true,
+  "steps": [
+    {
+      "step": "installPlugin",
+      "pluginData": {
+        "resource": "url",
+        "url": "https://raw.githubusercontent.com/luciensouthard-LSDS/psp-news-demo/main/psp-news-feed.zip"
+      },
+      "options": { "activate": true }
+    },
+    {
+      "step": "runPHP",
+      "code": "<?php require '/wordpress/wp-load.php'; $id = wp_insert_post(['post_title' => 'Pennsylvania State Police News — Live Demo', 'post_content' => '[psp_news_feed]', 'post_status' => 'publish', 'post_type' => 'page']); update_option('show_on_front', 'page'); update_option('page_on_front', $id); update_option('blogname', 'LS Digital Solutions — Plugin Demo');"
+    }
+  ]
+}
